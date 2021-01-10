@@ -22,16 +22,15 @@ public class InvoiceService {
 
     public Invoice get(String id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundException(Invoice.class, id));
-
     }
 
     public Invoice add(Invoice invoice) {
         return repository.save(invoice);
     }
 
-    public void update(String id, Invoice invoice) {
+    public Invoice update(String id, Invoice invoice) {
         invoice.setId(id);
-        repository.save(invoice);
+        return repository.save(invoice);
     }
 
     public void delete(String id) {
