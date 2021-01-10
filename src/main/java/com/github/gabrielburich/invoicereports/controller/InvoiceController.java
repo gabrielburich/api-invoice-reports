@@ -2,6 +2,10 @@ package com.github.gabrielburich.invoicereports.controller;
 
 import com.github.gabrielburich.invoicereports.domain.Invoice;
 import com.github.gabrielburich.invoicereports.service.InvoiceService;
+import com.github.gabrielburich.invoicereports.util.CommonConst;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,5 +49,16 @@ public class InvoiceController {
     public ResponseEntity<String> update(@PathVariable String id) {
         service.delete(id);
         return ResponseEntity.ok(id);
+    }
+
+    @GetMapping("/{id}/report")
+    public ResponseEntity<byte[]> getReport(@PathVariable String id) {
+        var report = service.getReport(id);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData(CommonConst.FILE_NAME, report.getFileName());
+
+        return new ResponseEntity<>(report.getBytes(), headers, HttpStatus.OK);
     }
 }

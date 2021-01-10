@@ -7,3 +7,7 @@ spring:
       authentication-database: admin
       username: gburich
       password: gburich
+
+report:
+  template-path: /report/invoice_report.jrxml
+  name-prefix: invoice
