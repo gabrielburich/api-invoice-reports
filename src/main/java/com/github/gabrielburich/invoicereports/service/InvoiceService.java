@@ -1,11 +1,11 @@
 package com.github.gabrielburich.invoicereports.service;
 
 import com.github.gabrielburich.invoicereports.domain.Invoice;
+import com.github.gabrielburich.invoicereports.exception.NotFoundException;
 import com.github.gabrielburich.invoicereports.repository.InvoiceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class InvoiceService {
@@ -20,12 +20,13 @@ public class InvoiceService {
         return repository.findAll();
     }
 
-    public Optional<Invoice> get(String budgetId) {
-        return repository.findById(budgetId);
+    public Invoice get(String id) {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException(Invoice.class, id));
+
     }
 
-    public Invoice add(Invoice budget) {
-        return repository.save(budget);
+    public Invoice add(Invoice invoice) {
+        return repository.save(invoice);
     }
 
     public void update(String id, Invoice invoice) {
