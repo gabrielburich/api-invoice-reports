@@ -20,5 +20,5 @@ public class Invoice {
     private String deadlineDescription;
     private Long daysValidity;
 
-    private final LocalDate creationDate = LocalDate.now();
+    private LocalDate creationDate = LocalDate.now();
 }
