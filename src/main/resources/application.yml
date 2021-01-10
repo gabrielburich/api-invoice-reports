@@ -3,7 +3,7 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: budget_report
+      database: invoice_report
       authentication-database: admin
       username: gburich
       password: gburich
